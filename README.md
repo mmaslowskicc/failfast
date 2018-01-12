@@ -79,7 +79,7 @@ Failfast configuration is provided as arguments to the decorator.
   * **timeout**: Time (in seconds) to automatically throw a `FailfastException` after first failure.
   * **store**: A store to persist currently broken services.
   * **exceptions:** A list of exceptions that are handled by Failfast. Defaults to any `Exception`.
-  * **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.
+  * **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.  
     * You might want to set this to `True` in your development environment.
 
 Distributed usage
