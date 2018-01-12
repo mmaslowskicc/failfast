@@ -14,7 +14,7 @@ if python_version < "3.5":
 
 setup(
     name="failfast",
-    version="0.0.1",
+    version="0.0.2",
     author="Matias Surdi",
     author_email="matias@surdi.net",
     keywords=["circuitbreaker", "circuit", "breaker"],

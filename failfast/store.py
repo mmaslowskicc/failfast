@@ -11,15 +11,15 @@ class Store(metaclass=ABCMeta):
 
     @abstractmethod
     def set_broken(self, key: str, ttl_seconds: int) -> None:
-        ...
+        """Mark the backend identified by 'key' as currently failing, expiring after 'ttl_seconds' seconds"""
 
     @abstractmethod
     def reset(self, key: str) -> None:
-        ...
+        """Reset the backend identified by 'key' so it is marked as working again"""
 
     @abstractmethod
     def is_broken(self, key: str) -> bool:
-        ...
+        """Check if the backend specified by 'key' is currently broken"""
 
 
 class InProcessStore(Store):
