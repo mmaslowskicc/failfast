@@ -1,4 +1,4 @@
-Failfast [![CircleCI](https://circleci.com/gh/ticketea/failfast.svg?style=svg&circle-token=7c5486e8508438ca0b70ef3d795c814d71ef91f4)](https://circleci.com/gh/ticketea/failfast) [![PyPI version](https://img.shields.io/pypi/v/failfast.svg)]() [![Python Versions](https://img.shields.io/pypi/pyversions/failfast.svg)]()
+Failfast [![CircleCI](https://circleci.com/gh/ticketea/failfast.svg?style=svg)](https://circleci.com/gh/ticketea/failfast) [![PyPI version](https://img.shields.io/pypi/v/failfast.svg)]() [![Python Versions](https://img.shields.io/pypi/pyversions/failfast.svg)]()
 =======
 
 Pythonic Circuit Breaker implementation
