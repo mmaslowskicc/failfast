@@ -1,5 +1,4 @@
 from unittest.mock import Mock, call
-
 import pytest
 
 from failfast.store import InProcessStore, DjangoCacheStore
@@ -8,14 +7,14 @@ NOW = 1515751348.2297542  # Current time.time()
 
 
 @pytest.fixture(name="cache")
-def cache_mock():
+def cache_mock() -> Mock:
     mock = Mock()
     mock.get = Mock()
     mock.set = Mock()
     return mock
 
 
-def test_inprocess_store():
+def test_inprocess_store() -> None:
     store = InProcessStore()
 
     store.set_broken("some_backend", 10)
@@ -23,7 +22,7 @@ def test_inprocess_store():
     assert store.is_broken("some_backend")
 
 
-def test_inprocess_expired():
+def test_inprocess_expired() -> None:
     clock_mock = Mock(side_effect=[NOW, NOW + 10])
     store = InProcessStore(clock=clock_mock)
 
@@ -32,7 +31,7 @@ def test_inprocess_expired():
     assert not store.is_broken("some_backend")
 
 
-def test_inprocess_not_expired():
+def test_inprocess_not_expired() -> None:
     clock_mock = Mock(side_effect=[NOW, NOW + 10])
     store = InProcessStore(clock=clock_mock)
 
@@ -41,7 +40,7 @@ def test_inprocess_not_expired():
     assert store.is_broken("some_backend")
 
 
-def test_inprocess_reset():
+def test_inprocess_reset() -> None:
     store = InProcessStore()
 
     store.set_broken("some_backend", 10)
@@ -50,7 +49,7 @@ def test_inprocess_reset():
     assert not store.is_broken("some_backend")
 
 
-def test_django_store_broken(cache):
+def test_django_store_broken(cache: Mock) -> None:
     cache.get.return_value = True
     store = DjangoCacheStore(cache)
 
@@ -60,7 +59,7 @@ def test_django_store_broken(cache):
     assert cache.set.mock_calls == [call("some_backend", True, 10)]
 
 
-def test_django_store_not_broken(cache):
+def test_django_store_not_broken(cache: Mock) -> None:
     cache.get.return_value = False
     store = DjangoCacheStore(cache)
 
@@ -70,7 +69,7 @@ def test_django_store_not_broken(cache):
     assert cache.set.mock_calls == [call("some_backend", True, 10)]
 
 
-def test_django_reset(cache):
+def test_django_reset(cache: Mock) -> None:
     cache.get.return_value = None
     store = DjangoCacheStore(cache)
 
