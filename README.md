@@ -1,15 +1,15 @@
 Failfast [![CircleCI](https://circleci.com/gh/ticketea/failfast.svg?style=svg)](https://circleci.com/gh/ticketea/failfast) [![PyPI version](https://img.shields.io/pypi/v/failfast.svg)]() [![Python Versions](https://img.shields.io/pypi/pyversions/failfast.svg)]()
 =======
 
-Pythonic Circuit Breaker implementation
+Pythonic Circuit Breaker implementation.
 
 Some features:
 
-   * Works in a distributed environment (multiple processes or hosts)
-   * Framework independent, easy integration with Django/Flask, etc
-   * Django integration included
-   * Development environment friendly (can be disabled by a setting)
-   * Python 3 only (yes, a feature)
+   * Works in a distributed environment (multiple processes or hosts).
+   * Framework independent, easy integration with Django/Flask, etc.
+   * Django integration included.
+   * Development environment friendly (can be disabled by a setting).
+   * Python 3 only (yes, a feature).
 
 
 Failfast is a simple decorator intended to protect your application from slow backends.
@@ -65,7 +65,7 @@ def my_view(request):
     try:
         return get_invoices()
     except FailfastException:
-        logger.info("Api is broken at this moment")
+        logger.info("API is broken at this moment")
         return "Some cached value or a message to retry later to the user"
 
 ```
@@ -75,12 +75,12 @@ Failfast options
 
 Failfast configuration is provided as arguments to the decorator.
 
-  * **name**: A key that uniquely identifies the backend API call
-  * **timeout**: Time (in seconds) to automatically throw a FailfastException after first failure
-  * **store**: A store to persist currently broken services
-  * **exceptions:** A list of exceptions that are handled by Failfast. Defaults to any `Exception`
-  * **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.
-    * You might want to set this to True in your development environment
+* **name**: A key that uniquely identifies the backend API call.
+* **timeout**: Time (in seconds) to automatically throw a `FailfastException` after first failure.
+* **store**: A store to persist currently broken services.
+* **exceptions:** A list of exceptions that are handled by Failfast. Defaults to any `Exception`.
+* **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.  
+  * You might want to set this to `True` in your development environment.
 
 Distributed usage
 -----------------
@@ -88,13 +88,13 @@ Distributed usage
 If your application consists of many processes and/or many hosts, then the information
 of a given backend service being down and/or available should be somehow shared.
 
-For this purpose, you can pass a custom `store` argument to failfast, see [here](failfast/store.py) for examples.
+For this purpose, you can pass a custom `store` argument to failfast, see [store.py](failfast/store.py) for examples.
 
 
 Django support
 --------------
 
-If you are using django, setup the cache framework to use a shared store like redis, memcache, database, etc
+If you are using Django, setup the cache framework to use a shared store like redis, memcache, database, etc
 and then use the decorator like:
 ```python
 from failfast import failfast
@@ -117,9 +117,12 @@ Running tests
 
 To run all tests in all environments and python versions supported, run:
 
-    make test
-
+```bash
+make test
+```
 
 To run a single test in a single environment, from within a `make shell` run:
 
-    tox -e py36 -- failfast/tests/store_tests.py::test_inprocess_reset
+```bash
+tox -e py36 -- failfast/tests/store_tests.py::test_inprocess_reset
+```
