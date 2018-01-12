@@ -1,0 +1,8 @@
+/.cache
+/.eggs
+/.idea
+/.mypy_cache
+/.tox
+/failfast.egg-info
+**/*.pyc
+/dist
