@@ -1,16 +1,14 @@
-Failfast [![CircleCI](https://circleci.com/gh/ticketea/failfast.svg?style=svg)](https://circleci.com/gh/ticketea/failfast) [![PyPI version](https://img.shields.io/pypi/v/failfast.svg)]() [![Python Versions](https://img.shields.io/pypi/pyversions/failfast.svg)]()
-=======
+# Failfast [![CircleCI](https://circleci.com/gh/ticketea/failfast.svg?style=svg)](https://circleci.com/gh/ticketea/failfast) ![PyPI version](https://img.shields.io/pypi/v/failfast.svg) ![Python Versions](https://img.shields.io/pypi/pyversions/failfast.svg)
 
 Pythonic Circuit Breaker implementation.
 
 Some features:
 
-   * Works in a distributed environment (multiple processes or hosts).
-   * Framework independent, easy integration with Django/Flask, etc.
-   * Django integration included.
-   * Development environment friendly (can be disabled by a setting).
-   * Python 3 only (yes, a feature).
-
+* Works in a distributed environment (multiple processes or hosts).
+* Framework independent, easy integration with Django/Flask, etc.
+* Django integration included.
+* Development environment friendly (can be disabled by a setting).
+* Python 3 only (yes, a feature).
 
 Failfast is a simple decorator intended to protect your application from slow backends.
 
@@ -27,15 +25,11 @@ Enter failfast, a pythonic Circuit Breaker implemented as a decorator which, whe
 is seen, it will return immediately for any subsequent calls during a specified period of time, thus
 leaving any external service time to recover, and keeping your application as snappy as possible.
 
-
-Installation
------------
+## Installation
 
 Install the latest stable version from Pypi with `pip install failfast`.
 
-
-Usage
------
+## Usage
 
 ```python
 import requests
@@ -49,12 +43,10 @@ def get_invoices():
     response = requests.get("http://api.example.com/invoices/", timeout=3)
 
     return response.content
-
 ```
 
 In the previous snipped, we wrapped `get_invoices` so that, when a `Timeout` happens, for the next
 60 seconds, calling `get_invoices` will throw a `FailfastException` immediately.
-
 
 You would use it as follows:
 
@@ -67,11 +59,9 @@ def my_view(request):
     except FailfastException:
         logger.info("API is broken at this moment")
         return "Some cached value or a message to retry later to the user"
-
 ```
 
-Failfast options
-----------------
+## Failfast options
 
 Failfast configuration is provided as arguments to the decorator.
 
@@ -79,23 +69,21 @@ Failfast configuration is provided as arguments to the decorator.
 * **timeout**: Time (in seconds) to automatically throw a `FailfastException` after first failure.
 * **store**: A store to persist currently broken services.
 * **exceptions:** A list of exceptions that are handled by Failfast. Defaults to any `Exception`.
-* **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.  
-  * You might want to set this to `True` in your development environment.
+* **enabled:** If set to `False`, failfast will just call the underlying function as if it were not installed.
+   \* You might want to set this to `True` in your development environment.
 
-Distributed usage
------------------
+## Distributed usage
 
 If your application consists of many processes and/or many hosts, then the information
 of a given backend service being down and/or available should be somehow shared.
 
 For this purpose, you can pass a custom `store` argument to failfast, see [store.py](failfast/store.py) for examples.
 
-
-Django support
---------------
+## Django support
 
 If you are using Django, setup the cache framework to use a shared store like redis, memcache, database, etc
 and then use the decorator like:
+
 ```python
 from failfast import failfast
 from failfast.store import  DjangoCacheStore
@@ -106,14 +94,11 @@ def my_fn():
     ...
 ```
 
-Development environment
-=======================
+## Development environment
 
 Run `make shell` and then use the tests/examples.
 
-
-Running tests
-=============
+## Running tests
 
 To run all tests in all environments and python versions supported, run:
 
