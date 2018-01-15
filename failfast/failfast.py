@@ -14,7 +14,7 @@ class FailfastException(Exception):
 
 def failfast(name: str,
              timeout_seconds: int = 300,
-             store: Store = None,
+             store: Optional[Store] = None,
              exceptions: Optional[List[Type[BaseException]]] = None,
              enabled: bool = True) -> Callable:
 
