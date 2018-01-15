@@ -20,7 +20,7 @@ setup(
     keywords=["circuitbreaker", "circuit", "breaker"],
     url="https://github.com/ticketea/failfast",
     description="Pythonic Circuit Breaker",
-    long_description="Kinesis based python eventbus",
+    long_description="Easy to use Pythonic circuit breaker for Python 3, supporting distributed environment setup, Django, and more",
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     platforms="any",
