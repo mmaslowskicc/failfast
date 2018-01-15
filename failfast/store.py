@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Dict, Callable
+from typing import Dict, Callable, Any
 import time
 
 
@@ -32,7 +32,7 @@ class InProcessStore(Store):
         self._data: Dict[str, float] = {}
         self._clock = clock
 
-    def set_broken(self, key: str, ttl_seconds: int):
+    def set_broken(self, key: str, ttl_seconds: int) -> None:
         self._data[key] = self._clock() + ttl_seconds
 
     def reset(self, key: str) -> None:
@@ -49,7 +49,7 @@ class DjangoCacheStore(Store):
     any other shared store if using this in a multi process or hosts environment
     """
 
-    def __init__(self, cache):
+    def __init__(self, cache: Any) -> None:
         self._cache = cache
 
     def set_broken(self, key: str, ttl_seconds: int) -> None:
@@ -59,4 +59,4 @@ class DjangoCacheStore(Store):
         self._cache.delete(key)
 
     def is_broken(self, key: str) -> bool:
-        return self._cache.get(key, False)
+        return bool(self._cache.get(key, False))

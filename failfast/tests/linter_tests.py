@@ -4,13 +4,13 @@ import sys
 from flake8.api import legacy as flake8
 
 
-def test_flake8_compliance():
+def test_flake8_compliance() -> None:
     pep8style = flake8.get_style_guide(config_file="tox.ini")
     result = pep8style.check_files(["failfast"])
     assert result.total_errors == 0
 
 
-def test_mypy_compliance():
+def test_mypy_compliance() -> None:
     result = subprocess.call("mypy --config-file tox.ini failfast",
                              shell=True,
                              stdout=sys.stdout,
