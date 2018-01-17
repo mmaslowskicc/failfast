@@ -36,10 +36,10 @@ def failfast(name: str,
                 return fn(*args, **kwargs)
             except BaseException as e:
                 should_handle = any([isinstance(e, class_) for class_ in exceptions_to_ignore])
-                if not should_handle:
-                    raise
-                store_service.set_broken(name, timeout_seconds)
-                logger.info("Failfast: Disabling failing request for %d seconds due to: %s", timeout_seconds, str(e))
+                if should_handle:
+                    store_service.set_broken(name, timeout_seconds)
+                    logger.info("Failfast: Disabling failing request for %d seconds due to: %s",
+                                timeout_seconds, str(e))
                 raise
 
         return wrapper
