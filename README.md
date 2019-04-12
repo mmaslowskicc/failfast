@@ -45,7 +45,7 @@ def get_invoices():
     return response.content
 ```
 
-In the previous snipped, we wrapped `get_invoices` so that, when a `Timeout` happens, for the next
+In the previous snippet, we wrapped `get_invoices` so that, when a `Timeout` happens, for the next
 60 seconds, calling `get_invoices` will throw a `FailfastException` immediately.
 
 You would use it as follows:
