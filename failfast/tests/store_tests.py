@@ -20,23 +20,27 @@ def test_inprocess_store() -> None:
     store.set_broken("some_backend", 10)
 
     assert store.is_broken("some_backend")
+    assert store.is_broken("some_backend")
 
 
 def test_inprocess_expired() -> None:
-    clock_mock = Mock(side_effect=[NOW, NOW + 10])
+    clock_mock = Mock(side_effect=[NOW, NOW, NOW, NOW + 10])
     store = InProcessStore(clock=clock_mock)
 
     store.set_broken("some_backend", 5)
 
+    assert store.is_broken("some_backend")
+    assert store.is_broken("some_backend")
     assert not store.is_broken("some_backend")
 
 
 def test_inprocess_not_expired() -> None:
-    clock_mock = Mock(side_effect=[NOW, NOW + 10])
+    clock_mock = Mock(side_effect=[NOW, NOW + 10, NOW + 10])
     store = InProcessStore(clock=clock_mock)
 
     store.set_broken("some_backend", 15)
 
+    assert store.is_broken("some_backend")
     assert store.is_broken("some_backend")
 
 

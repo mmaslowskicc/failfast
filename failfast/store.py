@@ -39,7 +39,7 @@ class InProcessStore(Store):
         self._data.pop(key, None)
 
     def is_broken(self, key: str) -> bool:
-        return self._data.pop(key, 0) > self._clock()
+        return self._data.get(key, 0) > self._clock()
 
 
 class DjangoCacheStore(Store):
